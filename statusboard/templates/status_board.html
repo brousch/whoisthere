@@ -4,18 +4,19 @@
         <meta charset="utf-8">
         <title>Power Washing Current Status</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        {% block style %}{% endblock style %}
-        {% block javascript %}{% endblock javascript %}
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/statusboard.css" />
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/statusboard.js"></script>
     </head>
     <body>
         <div class="title"><h1>{% block page_title %}
                 Power Washing Current Status
         {% endblock page_title %}</h1></div>
         <div class="content">
-            <hr />
             {% block messages %}
                 {% if messages %}
-                    <div class="messages" id="message_wrapper">
+                    <div class="messages" id="message-wrapper">
                     {% for message in messages %}
                         <div class="message-{{ message.tags }}">
                             {{ message }}
@@ -23,11 +24,9 @@
                     {% endfor %}
                     </div>
                 {% endif %}
-                <hr />
             {% endblock messages %}
             {% if all_msgs %}
                 <table id="status_msgs">
-                    <thead><tr><th>Message</th></tr></thead>
                     <tbody>
                         {% for m in all_msgs %}<tr>
                             <td>{{ m.msg }}</td>

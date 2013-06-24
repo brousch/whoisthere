@@ -16,17 +16,12 @@ def index(request):
         if (msg_id is not None) and (del_msg is not None):
             try:
                 this_status = Status.objects.get(pk=msg_id)
+                this_status.delete()
+                success_msg = "Deleted message: {}".format(this_status.msg)
+                messages.add_message(request, messages.SUCCESS, success_msg)
             except:
-                error_msg = "Attempted to delete message with invalid message id. Ignoring."
+                error_msg = "Something went wrong while deleting message {}".format(msg_id)
                 messages.add_message(request, messages.ERROR, error_msg)
-            if this_status:
-                try:
-                    this_status.delete()
-                    success_msg = "Deleted message: {}".format(this_status.msg)
-                    messages.add_message(request, messages.SUCCESS, success_msg)
-                except:
-                    error_msg = "Something went wrong while deleting message {}".format(msg_id)
-                    messages.add_message(request, messages.ERROR, error_msg)
         if new_msg is not None:
             try:
                 new_status = Status()
