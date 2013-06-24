@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Power Washing Current Status</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        {% block style %}{% endblock style %}
+        {% block javascript %}{% endblock javascript %}
+    </head>
+    <body>
+        <div class="title"><h1>{% block page_title %}
+                Power Washing Current Status
+        {% endblock page_title %}</h1></div>
+        <div class="content">
+            <hr />
+            {% block messages %}
+                {% if messages %}
+                    <div class="messages" id="message_wrapper">
+                    {% for message in messages %}
+                        <div class="message-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+                <hr />
+            {% endblock messages %}
+            {% if all_msgs %}
+                <table id="status_msgs">
+                    <thead><tr><th>Message</th></tr></thead>
+                    <tbody>
+                        {% for m in all_msgs %}<tr>
+                            <td>{{ m.msg }}</td>
+                            <td>
+                                <form method="post" action="/">{% csrf_token %}
+                                    <input type="hidden" name="msg_id" value="{{ m.pk }}" />
+                                    <input type="submit" 
+                                           name="del_msg" 
+                                           value="Remove" /> 
+                                </form>
+                            </td>
+                        </tr>{% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>There are currently no messages.</p>
+            {% endif %}
+            <hr />
+            <form method="post" action="/">{% csrf_token %}
+                <input type="text" name="new_msg" />
+                <input type="submit" name="new_msg_submit" value="Submit" />
+            </form>
+            <hr />
+        </div>
+    </body>
+</html>
