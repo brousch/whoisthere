@@ -27,6 +27,10 @@ div.content {
     margin: 0 1em 0 1em;
 }
 
+div.refresh {
+    margin: 0 0 1em 0;
+}
+
 table {
     background: rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(15, 15, 15, 1);

@@ -45,6 +45,10 @@
                 <p>There are currently no messages.</p>
             {% endif %}
             <hr />
+            <div class="refresh">
+                <a href="javascript:location.reload(true)">Refresh this page</a>
+            </div>
+            <hr />
             <form method="post" action="/">{% csrf_token %}
                 <input type="text" name="new_msg" />
                 <input type="submit" name="new_msg_submit" value="Submit" />
